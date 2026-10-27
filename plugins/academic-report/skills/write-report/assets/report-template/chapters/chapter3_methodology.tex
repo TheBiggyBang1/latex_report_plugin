@@ -1,0 +1,124 @@
+\chapter{Methodology and System Design}
+\label{chap:methodology}
+% How the project works and how it was built: the most reproducible chapter.
+% Covers CRISP-DM Data Understanding, Data Preparation, Modeling (MO.1, MO.3)
+% and Deployment planning (DE.1, DE.2). MO.2 and MO.4 are in Chapter 4.
+
+\section{Introduction}
+
+\section{Development Methodology: CRISP-DM}
+\label{sec:crispdm}
+The project follows the Cross-Industry Standard Process for Data Mining
+(CRISP-DM)~\cite{chapman2000crisp,wirth2000crisp}, which organizes a data
+project into six phases (business understanding, data understanding, data
+preparation, modeling, evaluation and deployment), each broken down into
+generic tasks with defined outputs. The phases are not executed strictly in
+sequence: the process explicitly allows returning to an earlier phase when a
+later one reveals a problem, as shown in Figure~\ref{fig:crispdm-cycle}.
+
+% Then, about THIS project:
+% - why CRISP-DM rather than an alternative such as the KDD process
+%   \cite{fayyad1996kdd} (cite only verified sources);
+% - how it was adapted (e.g. which tasks were light or not applicable);
+% - the iterations that ACTUALLY happened between phases, with evidence
+%   (experiment logs, git history). Do not invent loops.
+% - a pointer to Table~\ref{tab:crispdm-traceability}, which maps every
+%   generic task to the section of this report that addresses it.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/crisp_dm_cycle}
+  \caption[The CRISP-DM process model]{The six phases of the CRISP-DM process
+    model and the main transitions between them; the outer arrow denotes the
+    cyclic nature of data projects (redrawn after~\cite{chapman2000crisp}).}
+  \label{fig:crispdm-cycle}
+\end{figure}
+
+\input{chapters/crisp_dm_matrix}
+
+\section{System Architecture and Workflow}
+% A high-level box-and-arrow diagram of the real pipeline (data sources ->
+% preparation -> model -> outputs/integration) BEFORE the details below.
+
+\section{Data Understanding}
+% CRISP-DM phase 2. Numbers must be computed from the actual data.
+
+\subsection{Initial Data Collection}
+\crispdm{DU.1}
+% DU.1 Sources, acquisition method and date, licence or permission, provenance,
+% problems met during collection.
+
+\subsection{Data Description}
+\crispdm{DU.2}
+% DU.2 Format, volume, schema/fields with types and units, classes and counts,
+% time span. A table is usually clearest.
+
+\subsection{Data Exploration}
+\crispdm{DU.3}
+% DU.3 Distributions, class balance, correlations, representative (anonymized)
+% samples, and the findings that shaped later decisions.
+
+\subsection{Data Quality Verification}
+\crispdm{DU.4}
+% DU.4 Missing values, label noise, duplicates, outliers, inconsistencies and
+% bias, quantified. Every issue listed here is handled in Data Cleaning.
+
+\section{Data Preparation}
+% CRISP-DM phase 3.
+
+\subsection{Data Selection}
+\crispdm{DP.1}
+% DP.1 What was kept or excluded (records, attributes, time ranges) and why.
+
+\subsection{Data Cleaning}
+\crispdm{DP.2}
+% DP.2 For each quality issue from the previous phase: action taken and its
+% effect (counts before/after), or why it was left alone.
+
+\subsection{Data Construction and Feature Engineering}
+\crispdm{DP.3}
+% DP.3 Derived attributes (with formulas), augmentation or generated records
+% (technique, parameters), and the reason for each.
+
+\subsection{Data Integration}
+\crispdm{DP.4}
+% DP.4 How sources were merged (keys, conflicts). With a single source, change
+% the marker to \crispdm[na]{DP.4} and explain in one or two sentences.
+
+\subsection{Data Formatting}
+\crispdm{DP.5}
+% DP.5 Format conversions required by the modeling tools (label format,
+% resizing, normalization, encoding, file layout) and a short description of
+% the final dataset handed to modeling.
+
+\section{Modeling}
+% CRISP-DM phase 4. The test design (MO.2) and the model assessment (MO.4) are
+% reported in Chapter 4; point to them here.
+
+\subsection{Selection of Modeling Techniques}
+\crispdm{MO.1}
+% MO.1 Candidate techniques, the choice and its reasons (link to
+% Chapter~\ref{chap:sota}), and the assumptions the technique makes.
+
+\subsection{Model Building}
+\crispdm{MO.3}
+% MO.3 Architecture, hyperparameter table, training procedure (epochs,
+% optimizer, schedule, seeds), hardware, training time, and training curves
+% drawn from the real logs.
+
+\section{Deployment and Integration}
+% CRISP-DM phase 6 (planning). Keep "implemented", "prototype" and "planned"
+% distinct. Never claim production use that was not demonstrated.
+
+\subsection{Deployment Plan}
+\crispdm{DE.1}
+% DE.1 How the model reaches its users (API, application, edge device, batch
+% job): what is implemented versus proposed; an integration diagram if useful.
+
+\subsection{Monitoring and Maintenance Plan}
+\crispdm{DE.2}
+% DE.2 What would be monitored (input drift, prediction quality, latency),
+% retraining triggers and ownership. Usually a proposal: label it as such.
+
+\section{Conclusion}
+% Summarize the methodology; transition to the results.

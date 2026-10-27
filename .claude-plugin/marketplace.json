@@ -1,0 +1,20 @@
+{
+  "name": "latex-report-tools",
+  "owner": {
+    "name": "Mehdi Handous"
+  },
+  "metadata": {
+    "description": "Local marketplace for the academic-report plugin.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "academic-report",
+      "source": "./plugins/academic-report",
+      "description": "Write evidence-based LaTeX academic project reports and audit their CRISP-DM methodology coverage.",
+      "version": "0.1.0",
+      "keywords": ["latex", "academic-report", "crisp-dm", "thesis", "data-science"],
+      "category": "productivity"
+    }
+  ]
+}

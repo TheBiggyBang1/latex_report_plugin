@@ -1,0 +1,96 @@
+% Main source of the project report.
+% Build:  python <plugin>/skills/write-report/scripts/build_report.py report
+%    or:  latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+\documentclass[12pt,a4paper]{report}
+
+% --- Fonts, language, layout ----------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=16pt,headsep=18pt]{geometry}
+\usepackage{setspace}
+\setstretch{1.4}
+
+% --- Figures, tables, maths -------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,longtable,array}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,shapes.geometric}
+
+% --- Headers and footers ----------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\nouppercase{\textit{\leftmark}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancypagestyle{plain}{%
+  \fancyhf{}\fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% --- Contents and bibliography ----------------------------------------------
+\usepackage[nottoc,notbib]{tocbibind}   % lists of figures/tables in the TOC
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{hyperref}                   % keep hyperref last
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=magenta,urlcolor=magenta,
+            pdftitle={Project Report}}  % TODO: set the real title
+
+% --- Report macros ----------------------------------------------------------
+% \toverify{...}: visible red marker for a statement that still needs evidence.
+\newcommand{\toverify}[1]{\textcolor{red}{\textbf{[TO VERIFY: #1]}}}
+
+% \crispdm{ID}: marks the section that addresses CRISP-DM generic task ID
+% (BU.1 ... DE.4). Place it right under the section heading.
+% \crispdm[na]{ID}: the task does not apply; the section explains why.
+% Both print nothing. They feed the traceability table (\crisploc) and the
+% crisp_dm_check.py coverage checker. Only the first marker of an ID gets the label.
+\newcommand{\crispdm}[2][]{%
+  \ifcsname crispdm@seen@#2\endcsname\else
+    \expandafter\gdef\csname crispdm@seen@#2\endcsname{}\label{crisp:#2}%
+  \fi}
+% \crisploc{ID}: "§ 3.4.1, p. 23", used in the traceability table.
+\newcommand{\crisploc}[1]{\S\,\ref{crisp:#1}, p.~\pageref{crisp:#1}}
+
+\begin{document}
+
+% --- Front matter (Roman page numbers) --------------------------------------
+\pagenumbering{roman}
+% Include these only when the institution requires them or the author supplies
+% the wording. Never invent names, supervisors or host organizations.
+% \input{chapters/titlepage}
+% \input{chapters/dedication}        % create this file first if wanted
+% \input{chapters/acknowledgements}
+\input{chapters/abbreviations}
+\input{chapters/abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+
+% --- Main matter (Arabic page numbers restart at 1) -------------------------
+\clearpage
+\pagenumbering{arabic}
+\input{chapters/general_introduction}
+\input{chapters/chapter1_context}
+\input{chapters/chapter2_state_of_art}
+\input{chapters/chapter3_methodology}
+\input{chapters/chapter4_results}
+\input{chapters/general_conclusion}
+
+\printbibliography[heading=bibintoc,title={Bibliography}]
+
+% \appendix
+% \input{chapters/appendix_a}
+
+\end{document}

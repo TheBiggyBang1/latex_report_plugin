@@ -1,0 +1,32 @@
+% CRISP-DM process model, redrawn after Chapman et al. (2000).
+% Needs: \usepackage{tikz} and \usetikzlibrary{arrows.meta,shapes.geometric}.
+\begin{tikzpicture}[
+    font=\small,
+    phase/.style={draw, thick, rounded corners=3pt, fill=gray!8, align=center,
+                  text width=2.4cm, minimum height=1.1cm},
+    flow/.style={-{Stealth[length=2.2mm]}, thick},
+  ]
+  \node[draw, thick, cylinder, shape border rotate=90, aspect=0.25,
+        fill=gray!20, minimum width=1.6cm, minimum height=1.5cm] (data) at (0,0) {Data};
+
+  \node[phase] (bu) at (-3.2, 2.7) {Business\\understanding};
+  \node[phase] (du) at ( 3.2, 2.7) {Data\\understanding};
+  \node[phase] (dp) at ( 4.4, 0.0) {Data\\preparation};
+  \node[phase] (mo) at ( 3.2,-2.7) {Modeling};
+  \node[phase] (ev) at ( 0.0,-3.8) {Evaluation};
+  \node[phase] (de) at (-4.4,-1.2) {Deployment};
+
+  % Transitions of the reference model; paired arrows mean frequent back-and-forth.
+  \draw[flow] (bu) to[bend left=12] (du);
+  \draw[flow] (du) to[bend left=12] (bu);
+  \draw[flow] (du) -- (dp);
+  \draw[flow] (dp) to[bend left=12] (mo);
+  \draw[flow] (mo) to[bend left=12] (dp);
+  \draw[flow] (mo) -- (ev);
+  \draw[flow] (ev) -- (bu);
+  \draw[flow] (ev) -- (de);
+
+  % Outer cycle: data projects iterate.
+  \draw[flow, gray!70, line width=1.2pt]
+    (100:6.3) arc[start angle=100, end angle=-240, radius=6.3];
+\end{tikzpicture}

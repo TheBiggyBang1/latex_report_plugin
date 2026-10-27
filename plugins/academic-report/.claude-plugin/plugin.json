@@ -1,0 +1,9 @@
+{
+  "name": "academic-report",
+  "version": "0.1.0",
+  "description": "Write evidence-based LaTeX academic project reports and audit their CRISP-DM methodology coverage.",
+  "author": {
+    "name": "Mehdi Handous"
+  },
+  "keywords": ["latex", "academic-report", "crisp-dm", "thesis", "data-science"]
+}
